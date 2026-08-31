@@ -24,6 +24,28 @@ V1.4.1 keeps the original single-persona test and adds a domain-neutral Syntheti
 - The local LLM estimates profile impact while transparent JavaScript rules classify `complete`, `needs_support` or `abandon`.
 - JavaScript calculates the percentages from the individual simulation results; the LLM does not invent aggregate percentages.
 
+## Grounding and explainability safeguards
+
+V1.4.1 does not rely on the local language model alone for facts that can be checked directly from the scanned website.
+
+The scanner's structured evidence is treated as authoritative for verifiable details such as:
+
+- whether form fields exist;
+- whether fields have labels;
+- whether a submit control exists;
+- whether visible email, phone or contact/help routes are present;
+- which pages, links and actions actually exist.
+
+Task-intent checks also distinguish between different meanings of similar language. For example, asking what support an organisation provides is treated differently from asking for contact/support details, and finding information in a form is treated differently from actually submitting that form.
+
+When the model produces a claim that conflicts with verifiable scanner evidence, the grounded scanner result takes precedence.
+
+For Synthetic Cohorts, the local model estimates how supported friction may affect each profile, but the final Complete / Needs Support / Abandon outcome is produced by transparent application rules. Displayed outcome explanations are constructed from the actual task baseline, profile traits and classification rule so they remain consistent with the result.
+
+Task-level friction is propagated consistently across the cohort where appropriate, while unsupported or irrelevant profile-level friction is filtered out.
+
+Recommendations are also grounded against the scanner. The system avoids recommending fields or labels that already exist, avoids inventing phone numbers or destinations, and can return fewer than three recommendations when there are not three supported improvements.
+
 ## Domain-neutral scanner
 
 The scanner does not use Dogs Canberra-, dinosaur-, rowing-, shop- or bank-specific topic keywords. It extracts generic HTML information such as titles, headings, main text, links, buttons, form fields, labels, images, missing-alt signals and broken local links, then dynamically ranks pages from the user's task.
@@ -67,6 +89,7 @@ The server is intended for local use and binds to `127.0.0.1`.
 - No real browser clicking, form completion or autonomous journey navigation yet.
 - No screenshot/rendered-CSS analysis, so visual layout and contrast claims are intentionally limited.
 - Small local models can still hallucinate or reason incorrectly. Important findings must be checked against the actual website and, where appropriate, real user testing.
+- Grounding checks cover facts the static scanner can verify, but they do not guarantee that every AI interpretation or recommendation is correct. Human review remains required.
 - The included age-band cohorts are prototype presets, not official Hack for Humanity personas and not a claim that age determines digital behaviour.
 
 ## Credits

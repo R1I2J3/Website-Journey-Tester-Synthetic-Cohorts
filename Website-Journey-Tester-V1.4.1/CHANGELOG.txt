@@ -38,6 +38,7 @@ Created the first basic working version of Website Journey Tester V1.1.
 - Modified preview opens at `http://localhost:8787/modified/`.
 - Ollama can return a successful persona journey report.
 - Modified copies are created with timestamped folder names and recommendation notes.
+
 ### Recovery Update
 - Recreated a missing modified copy from the latest saved Digital Twin report.
 - Added a safer Create Modified Copy flow that can load the latest saved report after a browser or server refresh.
@@ -59,8 +60,28 @@ Created the first basic working version of Website Journey Tester V1.1.
 - Static-file path containment check prevents traversal into sibling project folders.
 - Cohort friction is counted at most once per user per friction code.
 
+### Final reliability refinements
+- Added task-intent grounding so informational tasks are distinguished from action/submission tasks.
+- Added semantic handling for terms such as "support" so organisation-provided support is not automatically treated as contact/customer support.
+- Made structured scanner facts authoritative for verifiable website properties such as fields, labels, submit controls and visible contact routes.
+- Added safeguards against model claims that contradict scanner evidence, such as reporting an existing form field as missing.
+- Improved task-level friction grounding so objective information gaps and missing actions are represented consistently across cohort results.
+- Filtered unsupported or task-irrelevant profile friction.
+- Improved individual outcome explanations so displayed reasons match the actual profile traits and deterministic classification rule.
+- Normalised effective profile impact when a task is satisfied and no supported friction remains.
+- Improved recommendation grounding so the system does not recommend fields or labels that already exist.
+- Removed the requirement to always produce three recommendations; satisfied tasks may correctly return no priority improvements.
+- Added safer recommendations for missing contact information and unavailable destinations, requiring verified organisation details or owner input instead of invented data.
+
+### Validation
+- Verified informational form inspection can succeed even when the form has no submit control.
+- Verified an actual form-submission task is blocked when the submit action is absent.
+- Verified organisation-provided foster support is distinguished from contact-support information.
+- Verified missing first-session booking information is treated as a cohort-wide information gap.
+- Verified missing phone/contact tasks do not generate fabricated contact details.
+- Verified satisfied factual tasks can return 100% Complete with no unsupported friction or recommendations.
+
 ### Known limitations
 - Static HTML only; no real browser navigation or JavaScript-heavy SPA execution.
 - Synthetic outcomes are hypotheses, not observed human behaviour.
 - Multiple accepted recommendations may target overlapping page elements, so all generated changes require human review.
-
