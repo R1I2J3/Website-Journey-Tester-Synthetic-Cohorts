@@ -1,0 +1,66 @@
+# Changelog
+
+## 2026-08-23 - Version 1.1 Basic Working Version
+
+Created the first basic working version of Website Journey Tester V1.1.
+
+### Added
+- Local-only browser app for testing website journeys with a user persona and task.
+- Simple workflow for non-technical users: scan website folder, enter persona, run Digital Twin, review report, and create a modified copy.
+- Static website import folder so users can copy HTML, CSS, images, and related files into `website`.
+- Dinosaur Pangaea placeholder website for testing the journey flow.
+- Ollama local LLM support using a lightweight local model.
+- Concise, plain-language journey report focused on whether the persona is likely to complete, abandon, or need support.
+- Website friction and information-gap recommendations based on the selected persona and task.
+- Loading bar and plain-language slow-run messages while the local LLM is working.
+- Retry button and clear error reason when Ollama cannot complete a report.
+- Timestamped modified-copy folders inside `website-modified`.
+- `Website-Journey-Recommendations.txt` note file inside each modified copy.
+- Latest report files inside `reports`.
+
+### Changed
+- Removed the built-in lightweight assessment fallback so reports now come from Ollama only.
+- Replaced the local LLM timeout with a loading bar so slower local runs can finish.
+- Improved Ollama report handling by requesting JSON output and retrying once internally if the response format is messy.
+- Updated preview paths so original and modified website previews open correctly.
+- Updated modified preview links so they point to the newest timestamped copy.
+- Kept the original website untouched when creating suggested edits.
+
+### Fixed
+- Fixed Not Found errors for Open Website Preview and Open Modified Preview.
+- Fixed support for websites where the main page is named `P1index.html` instead of `index.html`.
+- Fixed confusing Ollama model errors so users see a clearer reason and can retry.
+- Fixed report-format errors caused by Ollama returning extra text around JSON.
+
+### Verified
+- Website scan works with the Dinosaur Pangaea placeholder site.
+- Original preview opens at `http://localhost:8787/original/`.
+- Modified preview opens at `http://localhost:8787/modified/`.
+- Ollama can return a successful persona journey report.
+- Modified copies are created with timestamped folder names and recommendation notes.
+### Recovery Update
+- Recreated a missing modified copy from the latest saved Digital Twin report.
+- Added a safer Create Modified Copy flow that can load the latest saved report after a browser or server refresh.
+- Added collision-safe timestamp folder creation so new modified copies do not overwrite existing timestamp folders.
+- Verified the recreated modified preview opens correctly.
+
+## 2026-08-29 - Version 1.4.1 Synthetic Cohorts and Safe AI Edits
+
+### Added
+- Synthetic Cohort mode with reproducible profiles and aggregate outcomes.
+- Domain-neutral task-driven page ranking for local static HTML websites.
+- Task evidence baseline plus profile-impact assessment and deterministic outcome classification.
+- Safe AI edit operations on timestamped copies, with owner-review fallback.
+
+### Safety and reliability
+- Original website files remain untouched.
+- Safe-edit planning uses Llama 3.2 3B only; Qwen 3 1.7B remains experimental for assessment benchmarking.
+- Local HTTP server binds to 127.0.0.1 only.
+- Static-file path containment check prevents traversal into sibling project folders.
+- Cohort friction is counted at most once per user per friction code.
+
+### Known limitations
+- Static HTML only; no real browser navigation or JavaScript-heavy SPA execution.
+- Synthetic outcomes are hypotheses, not observed human behaviour.
+- Multiple accepted recommendations may target overlapping page elements, so all generated changes require human review.
+

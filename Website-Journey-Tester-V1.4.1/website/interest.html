@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Form | Dinosaur Pangaea</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="top-strip">Fictional test website for Digital Twin UX experiments</div>
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="./P1index.html"><span class="brand-mark">DP</span><span><strong>Dinosaur Pangaea</strong><small>Volunteer Walking Collective</small></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-links">Menu</button>
+      <div class="primary-links" id="primary-links">
+        <a href="./about.html">About Us</a>
+        <a href="./walk.html">Walk a Dinosaur</a>
+        <a href="./foster.html">Foster a Dinosaur</a>
+        <a href="./adopt.html">Adopt a Dinosaur</a>
+        <a class="nav-cta" href="./interest.html" aria-current="page">Volunteer Form</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Volunteer form</p>
+      <h1 id="interest-form-title">Register your fictional dinosaur interest.</h1>
+      <p>This local demo form is intentionally simple so your UX testing tool can inspect labels, fields, and page flow.</p>
+    </section>
+    <section class="content-grid form-section">
+      <div class="volunteer-form" role="group" aria-labelledby="interest-form-title">
+        <label for="name">Full name</label>
+        <input id="name" name="name" autocomplete="name" required>
+
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+
+        <label for="interest">I am interested in</label>
+        <select id="interest" name="interest" required>
+          <option value="">Choose an option</option>
+          <option>Walking dinosaurs</option>
+          <option>Fostering dinosaurs</option>
+          <option>Adopting a dinosaur</option>
+          <option>General volunteering</option>
+        </select>
+
+        <label for="experience">Dinosaur comfort level</label>
+        <select id="experience" name="experience" required>
+          <option value="">Choose an option</option>
+          <option>New to dinosaurs</option>
+          <option>Comfortable with small dinosaurs</option>
+          <option>Experienced with large herbivores</option>
+        </select>
+
+        <label for="message">Anything we should know?</label>
+        <textarea id="message" name="message" rows="5"></textarea>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="content-grid footer-grid"><p><strong>Dinosaur Pangaea</strong><br>Fictional volunteer site for local UX testing.</p><nav aria-label="Footer navigation"><a href="./P1index.html">Home</a><a href="./about.html">About</a><a href="./walk.html">Walk</a><a href="./foster.html">Foster</a><a href="./adopt.html">Adopt</a></nav></div>
+  </footer>
+  <script src="./site.js"></script>
+</body>
+</html>

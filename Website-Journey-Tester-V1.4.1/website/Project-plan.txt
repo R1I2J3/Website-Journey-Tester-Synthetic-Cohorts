@@ -1,0 +1,121 @@
+Digital Twin Marketing UX Website Improvement Project
+
+Project overview
+This project is a local prototype for helping website owners improve their website user experience using Digital Twin Marketing UX. The system will clone a webpage with the website owner's permission, save the copy locally, then allow the owner to run different simulated user personas across the cloned page.
+
+The goal is not to change the live website automatically. Instead, the tool should analyse the local copy, suggest improvements, let the website owner approve the suggestions, and then use a free local LLM to modify the local HTML/CSS.
+
+Core idea
+Digital Twin Marketing UX means creating simulated versions of different website users and using them to test how well a website works for those users.
+
+For example, one digital twin could represent an 80-year-old user who struggles with small text, unclear navigation, and complex forms. Another digital twin could represent a 20-year-old mobile-first user who expects fast navigation, clear calls to action, and simple page layouts.
+
+Project goals
+1. Clone an approved webpage and save it locally.
+2. Allow the website owner to choose from multiple digital twin personas.
+3. Analyse the cloned webpage from the selected persona's point of view.
+4. Generate practical UI/UX recommendations.
+5. Let the website owner approve or reject recommended changes.
+6. Use a free local LLM to apply approved changes to the local HTML/CSS.
+7. Save the modified version separately so the original clone is preserved.
+
+Example personas
+- Elderly user: May need larger text, clearer labels, simpler navigation, stronger contrast, and fewer confusing interactions.
+- Young mobile-first user: May expect fast loading, simple layouts, obvious buttons, and responsive design.
+- First-time donor: Needs trust signals, clear donation options, and a simple donation path.
+- Volunteer applicant: Needs to quickly find requirements, application steps, and contact details.
+- Accessibility-focused user: Needs semantic HTML, alt text, keyboard navigation, ARIA labels where needed, and readable contrast.
+
+Suggested implementation
+1. Webpage cloning
+   - Ask the website owner for permission and the webpage URL.
+   - Check that the project is only cloning permitted content.
+   - Use a browser automation or scraping tool to download the HTML, CSS, images, and required assets.
+   - Save the cloned page locally, for example in a folder named "cloned_site".
+   - Keep a clean original copy before making any modifications.
+
+2. Local preview
+   - Serve the cloned website on localhost.
+   - Allow the owner to view the original local clone in a browser.
+   - Keep the tool focused on local editing, not live deployment.
+
+3. Digital twin persona selection
+   - Provide a list of personas.
+   - Each persona should include:
+     - user age or demographic
+     - goal on the website
+     - likely frustrations
+     - accessibility needs
+     - expected behaviour
+   - The selected persona becomes the lens used for analysis.
+
+4. Webpage analysis
+   - Parse the HTML structure.
+   - Inspect headings, navigation, buttons, links, forms, images, alt text, labels, and page hierarchy.
+   - Optionally analyse CSS for font sizes, contrast, layout, and responsiveness.
+   - Identify problems that affect the selected persona.
+
+5. Recommendation engine
+   - Generate clear recommendations such as:
+     - make the donation button more visible
+     - increase text size for older users
+     - simplify navigation labels
+     - reduce form fields
+     - improve colour contrast
+     - add alt text to images
+     - add clearer headings
+     - improve mobile layout
+   - Each recommendation should include:
+     - the problem
+     - why it affects the selected persona
+     - the suggested change
+     - the likely UX benefit
+
+6. Human approval
+   - Show recommendations to the website owner.
+   - Let the owner approve, reject, or edit each recommendation.
+   - Do not modify files until the owner approves the change.
+
+7. Local LLM HTML/CSS modification
+   - Use a free local Hugging Face model or other local LLM.
+   - Give the LLM the approved recommendation and the relevant HTML/CSS section.
+   - Ask it to modify only the required files or sections.
+   - Save the changed version as a separate local copy, for example in "modified_site".
+   - Keep changes small and traceable.
+
+8. Review and comparison
+   - Let the owner compare the original clone and modified version.
+   - Optionally generate a short change report showing what was changed and why.
+   - The final output should be a local improved prototype, not an automatic live website update.
+
+Important ethical and legal points
+- Only clone webpages with the website owner's permission.
+- Do not bypass authentication, paywalls, or access controls.
+- Do not ignore explicit site restrictions.
+- Do not automatically publish or change the live website.
+- Keep the owner in control of all changes.
+- Preserve the original copy so changes can be reviewed or reverted.
+- Be careful with user data, analytics data, and any personal information.
+
+Possible technology stack
+- Python or Node.js for the main application.
+- Playwright or Puppeteer for webpage capture and local browser testing.
+- BeautifulSoup, Cheerio, or a DOM parser for HTML analysis.
+- Lighthouse or axe-core for accessibility and performance checks.
+- A local Hugging Face model for recommendation-to-code edits.
+- A simple local web UI for selecting personas and approving changes.
+- Git or file snapshots for tracking original and modified versions.
+
+Minimum viable product
+The first version should be simple:
+1. Input a permitted webpage URL.
+2. Clone the page locally.
+3. Select one persona.
+4. Analyse the HTML.
+5. Produce recommendations.
+6. Approve one recommendation.
+7. Apply that recommendation to the local HTML.
+8. Preview the modified page on localhost.
+
+Example project description
+This project creates a local Digital Twin Marketing UX tool for website owners. It clones an approved webpage, simulates different user personas, analyses the local HTML and UX structure, recommends improvements, and uses a local LLM to apply owner-approved changes to the local copy. The project keeps humans in control and focuses on safer local prototyping rather than automatic live website editing.

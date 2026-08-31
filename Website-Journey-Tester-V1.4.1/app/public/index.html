@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Website Journey Tester V1.4.1</title>
+  <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+  <header class="app-header">
+    <p class="eyebrow">Local AI UX Testing</p>
+    <h1>Website Journey Tester V1.4.1</h1>
+    <p>Test one synthetic user or a small synthetic cohort against local static website files. V1.4.1 ranks pages dynamically from the user's task and does not use industry-specific website keywords. Results are synthetic predictions, not observations of real people.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="section-title"><span>1</span><div><h2>Scan Website Folder</h2><p>Put any static HTML website inside <strong>website</strong>, then scan it. The scanner extracts generic page structure, text, links, forms and objective signals.</p></div></div>
+      <button id="scanButton" class="primary-button" type="button">Scan Website Folder</button>
+      <div id="scanResult" class="result-box muted">No scan yet.</div>
+      <div class="link-row compact-links">
+        <a href="/original/" target="_blank">Open Website Preview</a>
+        <a href="/reports/latest-report.html" target="_blank">Latest Single Report</a>
+        <a href="/reports/latest-cohort-report.html" target="_blank">Latest Cohort Report</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><span>2</span><div><h2>Choose Test Mode</h2><p>Single mode keeps Shane's original idea. Cohort mode runs several controlled synthetic users.</p></div></div>
+      <div class="mode-switch" role="group" aria-label="Test mode">
+        <button id="singleModeButton" class="mode-button active" type="button">Single Digital Twin</button>
+        <button id="cohortModeButton" class="mode-button" type="button">Synthetic Cohort</button>
+      </div>
+    </section>
+
+    <section id="singlePanel" class="panel">
+      <div class="section-title"><span>3A</span><div><h2>Single Digital Twin</h2><p>Describe one synthetic user and one task.</p></div></div>
+
+      <label for="singleModel">Local model</label>
+      <select id="singleModel">
+        <option value="llama3.2:3b" selected>Llama 3.2 3B — default</option>
+        <option value="qwen3:1.7b">Qwen 3 1.7B — experimental (faster, less reliable)</option>
+      </select>
+
+      <label for="persona">Persona</label>
+      <textarea id="persona" rows="5">A 72-year-old first-time volunteer with low confidence using unfamiliar online forms, no previous knowledge of the organisation, and a high need for clear reassurance before booking a first walking session.</textarea>
+
+      <label for="task">Task</label>
+      <textarea id="task" rows="3">Find information about the walking program and understand how to book a first session.</textarea>
+
+      <button id="assessButton" class="primary-button" type="button">Run Single Digital Twin</button>
+      <div id="singleReport" class="result-box muted">Run the Digital Twin to see the report.</div>
+      <button id="modifyButton" class="primary-button" type="button" disabled>Create AI-Modified Copy</button>
+      <p class="muted-text">V1.4.1 attempts real HTML edits on a timestamped copy. Safe-edit planning always uses Llama 3.2 3B; unsafe or underspecified changes fall back to an owner-review note.</p>
+      <div id="modifyResult" class="result-box muted">No modified copy created yet.</div>
+    </section>
+
+    <section id="cohortPanel" class="panel hidden">
+      <div class="section-title"><span>3B</span><div><h2>Synthetic Cohort</h2><p>Select a demographic cohort, choose which functional traits are random or fixed, then run the same task for several synthetic users.</p></div></div>
+
+      <div class="notice">
+        <strong>Responsible-AI design:</strong> demographic cohort sets the age range only. Other traits vary independently, so the app does not assume age determines technical ability, confidence or accessibility needs. These three age bands are prototype cohort presets, not official challenge demographics.
+      </div>
+
+      <div class="form-grid">
+        <div>
+          <label for="cohort">Demographic cohort</label>
+          <select id="cohort">
+            <option value="younger">Younger adults (18–34)</option>
+            <option value="middle">Middle-age adults (35–64)</option>
+            <option value="older" selected>Older adults (65–85)</option>
+          </select>
+        </div>
+        <div>
+          <label for="cohortModel">Local model</label>
+          <select id="cohortModel">
+            <option value="llama3.2:3b" selected>Llama 3.2 3B — default</option>
+            <option value="qwen3:1.7b">Qwen 3 1.7B — experimental (faster, less reliable)</option>
+          </select>
+        </div>
+        <div>
+          <label for="simulationCount">Simulations</label>
+          <select id="simulationCount">
+            <option value="3">3 — demo</option>
+            <option value="5" selected>5 — recommended today</option>
+            <option value="10">10 — standard</option>
+            <option value="20">20 — maximum</option>
+          </select>
+        </div>
+        <div>
+          <label for="seed">Random seed</label>
+          <input id="seed" type="number" value="20260829" step="1">
+          <small>Same seed + settings creates the same synthetic profiles.</small>
+        </div>
+      </div>
+
+      <h3>Trait settings</h3>
+      <p class="muted-text">Choose <strong>Randomise</strong> to create variation within the cohort, or fix a trait to test a specific subgroup.</p>
+
+      <div class="form-grid trait-grid">
+        <div><label for="digitalConfidence">Digital confidence</label><select id="digitalConfidence"><option value="random" selected>Randomise</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+        <div><label for="formConfidence">Online-form confidence</label><select id="formConfidence"><option value="random" selected>Randomise</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+        <div><label for="organisationFamiliarity">Organisation familiarity</label><select id="organisationFamiliarity"><option value="random" selected>Randomise</option><option>None</option><option>Some</option><option>High</option></select></div>
+        <div><label for="timePressure">Time pressure</label><select id="timePressure"><option value="random" selected>Randomise</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+        <div><label for="reassuranceNeed">Need for reassurance</label><select id="reassuranceNeed"><option value="random" selected>Randomise</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+        <div><label for="supportSeeking">Tendency to seek human support</label><select id="supportSeeking"><option value="random" selected>Randomise</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+        <div><label for="accessibilityNeed">Accessibility requirement</label><select id="accessibilityNeed"><option value="random" selected>Randomise</option><option>None identified</option><option>Low vision</option><option>Needs especially clear keyboard-friendly navigation</option></select></div>
+      </div>
+
+      <label for="cohortTask">Task</label>
+      <textarea id="cohortTask" rows="3">Find information about the walking program and understand how to book a first session.</textarea>
+      <small>The default task matches the bundled Dinosaur Pangaea demo website. Replace it with any task relevant to the website files you scan.</small>
+
+      <button id="runCohortButton" class="primary-button" type="button">Run Synthetic Cohort</button>
+
+      <div id="cohortProgress" class="result-box muted">No cohort run yet.</div>
+      <div id="cohortResult" class="result-box muted">Results will appear here.</div>
+      <button id="cohortModifyButton" class="primary-button" type="button" disabled>Create Cohort AI-Modified Copy</button>
+      <p class="muted-text">Approved cohort recommendations are applied to a copied site when the local AI can produce a validated source edit.</p>
+      <div id="cohortModifyResult" class="result-box muted">No cohort modified copy created yet.</div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><span>4</span><div><h2>Important Limitation</h2></div></div>
+      <p>Percentages shown in cohort mode are calculated from synthetic assessments. They are <strong>not</strong> survey results, clinical evidence, or observed behaviour from real people. V1.4.1 analyses and can safely edit copied local static HTML source; it does not execute JavaScript-heavy applications, perform real browser clicks, or visually inspect CSS/layout. Use results to identify possible UX friction and hypotheses that should later be validated with real users.</p>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

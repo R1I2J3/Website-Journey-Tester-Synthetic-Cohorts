@@ -1,0 +1,10 @@
+{
+  "name": "website-journey-tester",
+  "version": "1.4.1",
+  "description": "Local synthetic-persona and synthetic-cohort website journey tester with safe AI-edited preview copies.",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node app/server.js"
+  },
+  "private": true
+}

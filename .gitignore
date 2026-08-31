@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+*.rar
+
+# Runtime-generated reports and modified website copies
+Website-Journey-Tester-V1.4.1/reports/*
+!Website-Journey-Tester-V1.4.1/reports/.gitkeep
+Website-Journey-Tester-V1.4.1/website-modified/*
+!Website-Journey-Tester-V1.4.1/website-modified/.gitkeep
